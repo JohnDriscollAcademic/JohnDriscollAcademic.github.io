@@ -1,64 +1,139 @@
-
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>John Driscoll</title>
+
+```
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: white;
+        color: #111;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .container {
+        width: 900px;
+        max-width: calc(100% - 40px);
+        margin: 40px auto;
+    }
+
+    .hero {
+        width: 100%;
+        margin-bottom: 35px;
+    }
+
+    .hero img {
+        width: 100%;
+        height: auto;
+        display: block;
+    }
+
+    h1 {
+        font-size: 48px;
+        margin: 0 0 8px 0;
+        font-weight: 700;
+        letter-spacing: -1px;
+    }
+
+    .subtitle {
+        font-size: 20px;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-size: 25px;
+        margin-top: 40px;
+        margin-bottom: 15px;
+    }
+
+    p {
+        font-size: 17px;
+        line-height: 1.6;
+    }
+
+    a {
+        color: #111;
+    }
+
+    ul {
+        padding-left: 25px;
+    }
+
+    li {
+        margin-bottom: 25px;
+        line-height: 1.5;
+    }
+
+    .contact {
+        margin-top: 40px;
+        padding-top: 25px;
+        border-top: 1px solid #ddd;
+    }
+
+    .footer {
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+        color: #777;
+        font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+        .container {
+            margin: 25px auto;
+            max-width: calc(100% - 30px);
+        }
+
+        h1 {
+            font-size: 38px;
+        }
+
+        .hero img {
+            width: 100%;
+        }
+    }
+</style>
+```
+
 </head>
 
 <body>
 
-<table width="900" cellpadding="20" cellspacing="0">
-<tr>
+<div class="container">
 
-<td width="220" valign="top">
-    <img src="PDE.png" alt="PDE" width="200">
-</td>
+```
+<!-- Eigenfunction visualization -->
+<div class="hero">
+    <img
+        src="JOHN_DRISCOLL_eigenfunctions_lmr.png"
+        alt="Dirichlet Laplacian eigenfunctions on the letters JOHN DRISCOLL">
+</div>
 
-<td valign="top">
+<h1>John Driscoll</h1>
 
-    <h1>John Driscoll</h1>
-
-    <p>
-        Ph.D. Candidate in Computational Science and Engineering
-    </p>
-
-    <p>
-        University of Massachusetts Dartmouth
-    </p>
-
-    <p>
-        Email:
-        <a href="mailto:jdriscoll9@umassd.edu">
-            jdriscoll9@umassd.edu
-        </a>
-    </p>
-
-</td>
-
-</tr>
-</table>
-
-<hr>
-
-<table width="900" cellpadding="20" cellspacing="0">
-<tr>
-<td>
+<div class="subtitle">
+    Ph.D. Candidate in Computational Science and Engineering
+</div>
 
 <h2>Research</h2>
 
 <p>
-My research is in applied and computational mathematics, with a focus
-on numerical methods, partial differential equations, scientific
-computing, and numerical linear algebra.
+    My research is in applied and computational mathematics, with a
+    focus on numerical methods, partial differential equations,
+    scientific computing, and numerical linear algebra.
 </p>
 
 <p>
-My current work focuses on efficient numerical methods
-for differential equations.
+    My current work focuses on efficient numerical methods
+    for differential equations.
 </p>
-
 
 <h2>Preprints</h2>
 
@@ -66,30 +141,36 @@ for differential equations.
 
     <li>
         <a href="https://arxiv.org/abs/2607.10967">
-            <b>Performance Evaluation of Stabilized Corrections for
-            Mixed Precision Runge--Kutta Methods</b>
-        </a><br>
+            <b>
+                Performance Evaluation of Stabilized Corrections
+                for Mixed Precision Runge--Kutta Methods
+            </b>
+        </a>
+        <br>
         César Herrera, John Driscoll, Sigal Gottlieb,
         Zachary J. Grant, Tej Sai Kakumanu, Andrew Christlieb
     </li>
 
-    <br>
-
     <li>
         <a href="https://arxiv.org/abs/2604.14479">
-            <b>Smooth perturbations of diagonally implicit Runge--Kutta methods</b>
-        </a><br>
+            <b>
+                Smooth perturbations of diagonally implicit
+                Runge--Kutta methods
+            </b>
+        </a>
+        <br>
         John Driscoll, Sigal Gottlieb, Zachary J. Grant,
         César Herrera, Tej Sai Kakumanu, Monica Stephens
     </li>
 
-    <br>
-
     <li>
         <a href="https://arxiv.org/abs/2603.24451">
-            <b>Stable corrections for perturbed diagonally implicit
-            Runge--Kutta methods</b>
-        </a><br>
+            <b>
+                Stable corrections for perturbed diagonally implicit
+                Runge--Kutta methods
+            </b>
+        </a>
+        <br>
         John Driscoll, Sigal Gottlieb, Zachary J. Grant,
         César Herrera, Tej Sai Kakumanu, Michael H. Sawicki,
         Monica Stephens
@@ -97,30 +178,25 @@ for differential equations.
 
 </ul>
 
+<div class="contact">
 
-<h2>Contact</h2>
+    <h2>Contact</h2>
 
-<p>
-    John Driscoll<br>
-    Email:
-    <a href="mailto:jdriscoll9@umassd.edu">
-        jdriscoll9@umassd.edu
-    </a>
-</p>
+    <p>
+        <a href="mailto:jdriscoll9@umassd.edu">
+            jdriscoll9@umassd.edu
+        </a>
+    </p>
 
-</td>
-</tr>
-</table>
+</div>
 
-<hr>
+<div class="footer">
+    Last updated August 2026.
+</div>
+```
 
-<p>
-<small>
-Last updated August 2026.
-</small>
-</p>
+</div>
 
 </body>
 
 </html>
-
