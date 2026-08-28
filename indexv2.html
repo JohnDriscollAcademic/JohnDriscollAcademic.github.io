@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>John Driscoll — Computational Mathematics</title>
+
+<meta name="description"
+      content="John Driscoll — Ph.D. student in Computational Science and Engineering at the University of Massachusetts Dartmouth. Research in numerical mathematics, PDEs, scientific computing, and numerical linear algebra.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap"
+      rel="stylesheet">
+
+<style>
+
+    :root {
+        --background: #f7f7f5;
+        --surface: #ffffff;
+        --text: #171717;
+        --muted: #6b6b68;
+        --faint: #a2a29e;
+        --line: #deded9;
+        --accent: #171717;
+        --max-width: 1180px;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: var(--background);
+        color: var(--text);
+        font-family: "DM Sans", sans-serif;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+        color: inherit;
+        text-decoration: none;
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
+    }
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+
+    .nav-wrapper {
+        width: 100%;
+        border-bottom: 1px solid var(--line);
+        background: rgba(247,247,245,0.92);
+        backdrop-filter: blur(12px);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    nav {
+        max-width: var(--max-width);
+        margin: auto;
+        height: 76px;
+        padding: 0 28px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .nav-name {
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        font-size: 17px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 30px;
+        list-style: none;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+        color: var(--muted);
+        transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--text);
+    }
+
+    /* ============================================================
+       MAIN
+       ============================================================ */
+
+    main {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 0 28px;
+    }
+
+    /* ============================================================
+       HERO
+       ============================================================ */
+
+    .hero {
+        padding: 72px 0 110px;
+    }
+
+    .hero-image {
+        width: 100%;
+        overflow: hidden;
+        border-radius: 3px;
+        background: white;
+        margin-bottom: 52px;
+    }
+
+    .hero-image img {
+        width: 100%;
+        height: auto;
+        transition: transform 0.8s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .hero-image:hover img {
+        transform: scale(1.012);
+    }
+
+    .hero-grid {
+        display: grid;
+        grid-template-columns: 1.4fr 0.6fr;
+        gap: 80px;
+        align-items: end;
+    }
+
+    .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 18px;
+    }
+
+    h1 {
+        font-size: clamp(52px, 8vw, 104px);
+        line-height: 0.91;
+        letter-spacing: -0.065em;
+        font-weight: 700;
+    }
+
+    .hero-description {
+        font-family: "Source Serif 4", serif;
+        font-size: 22px;
+        line-height: 1.45;
+        color: #40403d;
+        max-width: 470px;
+    }
+
+    .hero-meta {
+        margin-top: 27px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.8;
+    }
+
+    .hero-links {
+        margin-top: 26px;
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--text);
+        padding: 10px 17px;
+        font-size: 13px;
+        transition: all 0.2s ease;
+    }
+
+    .button:hover {
+        background: var(--text);
+        color: white;
+    }
+
+    .button.secondary {
+        border-color: var(--line);
+        color: var(--muted);
+    }
+
+    .button.secondary:hover {
+        border-color: var(--text);
+        color: var(--text);
+        background: transparent;
+    }
+
+    /* ============================================================
+       SECTION
+       ============================================================ */
+
+    section {
+        border-top: 1px solid var(--line);
+        padding: 88px 0;
+    }
+
+    .section-header {
+        display: grid;
+        grid-template-columns: 0.28fr 0.72fr;
+        gap: 50px;
+        margin-bottom: 55px;
+    }
+
+    .section-number {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        color: var(--faint);
+    }
+
+    h2 {
+        font-size: clamp(32px, 4vw, 48px);
+        line-height: 1;
+        letter-spacing: -0.045em;
+        font-weight: 600;
+    }
+
+    .section-intro {
+        margin-top: 17px;
+        max-width: 670px;
+        font-family: "Source Serif 4", serif;
+        font-size: 20px;
+        color: #555551;
+        line-height: 1.55;
+    }
+
+    /* ============================================================
+       RESEARCH
+       ============================================================ */
+
+    .research-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        background: var(--line);
+        border: 1px solid var(--line);
+    }
+
+    .research-card {
+        background: var(--background);
+        padding: 30px;
+        min-height: 205px;
+    }
+
+    .research-card-number {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        color: var(--faint);
+        margin-bottom: 35px;
+    }
+
+    .research-card h3 {
+        font-size: 19px;
+        letter-spacing: -0.025em;
+        margin-bottom: 10px;
+    }
+
+    .research-card p {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.65;
+    }
+
+    /* ============================================================
+       PAPERS
+       ============================================================ */
+
+    .paper {
+        display: grid;
+        grid-template-columns: 90px 1fr auto;
+        gap: 30px;
+        padding: 29px 0;
+        border-top: 1px solid var(--line);
+        align-items: start;
+    }
+
+    .paper:last-child {
+        border-bottom: 1px solid var(--line);
+    }
+
+    .paper-number {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        color: var(--faint);
+    }
+
+    .paper-title {
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.35;
+        letter-spacing: -0.02em;
+        transition: opacity 0.2s ease;
+    }
+
+    .paper-title:hover {
+        opacity: 0.55;
+    }
+
+    .paper-authors {
+        margin-top: 7px;
+        font-size: 13px;
+        color: var(--muted);
+    }
+
+    .paper-link {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        color: var(--muted);
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 3px;
+    }
+
+    .paper-link:hover {
+        color: var(--text);
+        border-color: var(--text);
+    }
+
+    /* ============================================================
+       PROJECTS
+       ============================================================ */
+
+    .project-list {
+        border-top: 1px solid var(--line);
+    }
+
+    .project {
+        display: grid;
+        grid-template-columns: 90px 1fr 30px;
+        gap: 30px;
+        padding: 28px 0;
+        border-bottom: 1px solid var(--line);
+        align-items: center;
+        transition: padding 0.25s ease;
+    }
+
+    .project:hover {
+        padding-left: 10px;
+    }
+
+    .project-number {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        color: var(--faint);
+    }
+
+    .project-name {
+        font-size: 19px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+
+    .project-description {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 4px;
+    }
+
+    .project-arrow {
+        font-size: 18px;
+        color: var(--muted);
+        transition: transform 0.2s ease;
+    }
+
+    .project:hover .project-arrow {
+        transform: translateX(5px);
+    }
+
+    /* ============================================================
+       CONTACT
+       ============================================================ */
+
+    .contact-grid {
+        display: grid;
+        grid-template-columns: 0.65fr 0.35fr;
+        gap: 80px;
+    }
+
+    .contact-large {
+        font-family: "Source Serif 4", serif;
+        font-size: clamp(28px, 4vw, 45px);
+        line-height: 1.25;
+        max-width: 670px;
+    }
+
+    .contact-email {
+        display: inline-block;
+        margin-top: 27px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        border-bottom: 1px solid var(--text);
+        padding-bottom: 4px;
+    }
+
+    .contact-side {
+        font-size: 14px;
+        color: var(--muted);
+        line-height: 1.8;
+    }
+
+    .contact-side strong {
+        color: var(--text);
+        font-weight: 500;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+
+    footer {
+        border-top: 1px solid var(--line);
+        padding: 28px 0 40px;
+    }
+
+    .footer-inner {
+        max-width: var(--max-width);
+        margin: auto;
+        padding: 0 28px;
+
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        color: var(--faint);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+
+    @media (max-width: 800px) {
+
+        nav {
+            height: 65px;
+        }
+
+        .nav-links {
+            display: none;
+        }
+
+        .hero {
+            padding: 42px 0 75px;
+        }
+
+        .hero-grid {
+            grid-template-columns: 1fr;
+            gap: 35px;
+        }
+
+        .hero-description {
+            font-size: 19px;
+        }
+
+        section {
+            padding: 65px 0;
+        }
+
+        .section-header {
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-bottom: 38px;
+        }
+
+        .research-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .paper {
+            grid-template-columns: 45px 1fr;
+            gap: 15px;
+        }
+
+        .paper-link {
+            grid-column: 2;
+            width: max-content;
+            margin-top: 5px;
+        }
+
+        .project {
+            grid-template-columns: 45px 1fr 20px;
+            gap: 15px;
+        }
+
+        .contact-grid {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .footer-inner {
+            flex-direction: column;
+        }
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+<!-- ================================================================
+     NAVIGATION
+     ================================================================ -->
+
+<div class="nav-wrapper">
+
+```
+<nav>
+
+    <a href="#" class="nav-name">
+        JD
+    </a>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="#research">Research</a>
+        </li>
+
+        <li>
+            <a href="#papers">Papers</a>
+        </li>
+
+        <li>
+            <a href="#projects">Projects</a>
+        </li>
+
+        <li>
+            <a href="#contact">Contact</a>
+        </li>
+
+    </ul>
+
+</nav>
+```
+
+</div>
+
+<main>
+
+<!-- ================================================================
+     HERO
+     ================================================================ -->
+
+<section class="hero" style="border-top: none;">
+
+```
+<div class="hero-image">
+
+    <img
+        src="JOHN_DRISCOLL_eigenfunctions_lmr.png"
+        alt="John Driscoll represented through Laplacian eigenfunctions"
+    >
+
+</div>
+
+
+<div class="hero-grid">
+
+    <div>
+
+        <div class="eyebrow">
+            Computational Mathematics · UMass Dartmouth
+        </div>
+
+        <h1>
+            John<br>
+            Driscoll
+        </h1>
+
+    </div>
+
+
+    <div>
+
+        <p class="hero-description">
+            Ph.D. student working at the intersection of
+            numerical mathematics, scientific computing,
+            and differential equations.
+        </p>
+
+        <p class="hero-meta">
+            Computational Science and Engineering<br>
+            University of Massachusetts Dartmouth
+        </p>
+
+        <div class="hero-links">
+
+            <a class="button"
+               href="mailto:jdriscoll9@umassd.edu">
+                Email
+            </a>
+
+            <a class="button secondary"
+               href="#papers">
+                Publications
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- ================================================================
+     RESEARCH
+     ================================================================ -->
+
+<section id="research">
+
+```
+<div class="section-header">
+
+    <div class="section-number">
+        01 / RESEARCH
+    </div>
+
+    <div>
+
+        <h2>
+            Numerical mathematics
+            for scientific computing.
+        </h2>
+
+        <p class="section-intro">
+            My research focuses on the development and analysis
+            of numerical methods for differential equations,
+            with an emphasis on methods that are accurate,
+            stable, and computationally efficient.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="research-grid">
+
+    <div class="research-card">
+
+        <div class="research-card-number">
+            01
+        </div>
+
+        <h3>
+            Numerical PDEs
+        </h3>
+
+        <p>
+            Discretization and computation for partial
+            differential equations, including finite-element
+            and spectral methods.
+        </p>
+
+    </div>
+
+
+    <div class="research-card">
+
+        <div class="research-card-number">
+            02
+        </div>
+
+        <h3>
+            Time Integration
+        </h3>
+
+        <p>
+            Runge–Kutta and diagonally implicit methods,
+            stability, perturbations, and efficient
+            time integration.
+        </p>
+
+    </div>
+
+
+    <div class="research-card">
+
+        <div class="research-card-number">
+            03
+        </div>
+
+        <h3>
+            Scientific Computing
+        </h3>
+
+        <p>
+            High-performance numerical algorithms,
+            mixed-precision computation, and numerical
+            linear algebra.
+        </p>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- ================================================================
+     PAPERS
+     ================================================================ -->
+
+<section id="papers">
+
+```
+<div class="section-header">
+
+    <div class="section-number">
+        02 / PAPERS
+    </div>
+
+    <div>
+
+        <h2>
+            Selected work.
+        </h2>
+
+        <p class="section-intro">
+            Recent research in numerical time integration,
+            stability, and efficient computation.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="paper">
+
+    <div class="paper-number">
+        2026
+    </div>
+
+    <div>
+
+        <a
+            class="paper-title"
+            href="https://arxiv.org/abs/2607.10967"
+            target="_blank"
+            rel="noopener">
+            Performance Evaluation of Stabilized Corrections
+            for Mixed Precision Runge–Kutta Methods
+        </a>
+
+        <p class="paper-authors">
+            César Herrera, John Driscoll, Sigal Gottlieb,
+            Zachary J. Grant, Tej Sai Kakumanu,
+            Andrew Christlieb
+        </p>
+
+    </div>
+
+    <a
+        class="paper-link"
+        href="https://arxiv.org/abs/2607.10967"
+        target="_blank"
+        rel="noopener">
+        arXiv ↗
+    </a>
+
+</div>
+
+
+<div class="paper">
+
+    <div class="paper-number">
+        2026
+    </div>
+
+    <div>
+
+        <a
+            class="paper-title"
+            href="https://arxiv.org/abs/2604.14479"
+            target="_blank"
+            rel="noopener">
+            Smooth perturbations of diagonally implicit
+            Runge–Kutta methods
+        </a>
+
+        <p class="paper-authors">
+            John Driscoll, Sigal Gottlieb, Zachary J. Grant,
+            César Herrera, Tej Sai Kakumanu,
+            Monica Stephens
+        </p>
+
+    </div>
+
+    <a
+        class="paper-link"
+        href="https://arxiv.org/abs/2604.14479"
+        target="_blank"
+        rel="noopener">
+        arXiv ↗
+    </a>
+
+</div>
+
+
+<div class="paper">
+
+    <div class="paper-number">
+        2026
+    </div>
+
+    <div>
+
+        <a
+            class="paper-title"
+            href="https://arxiv.org/abs/2603.24451"
+            target="_blank"
+            rel="noopener">
+            Stable corrections for perturbed diagonally
+            implicit Runge–Kutta methods
+        </a>
+
+        <p class="paper-authors">
+            John Driscoll, Sigal Gottlieb, Zachary J. Grant,
+            César Herrera, Tej Sai Kakumanu,
+            Michael H. Sawicki, Monica Stephens
+        </p>
+
+    </div>
+
+    <a
+        class="paper-link"
+        href="https://arxiv.org/abs/2603.24451"
+        target="_blank"
+        rel="noopener">
+        arXiv ↗
+    </a>
+
+</div>
+```
+
+</section>
+
+<!-- ================================================================
+     PROJECTS
+     ================================================================ -->
+
+<section id="projects">
+
+```
+<div class="section-header">
+
+    <div class="section-number">
+        03 / PROJECTS
+    </div>
+
+    <div>
+
+        <h2>
+            Computation as a
+            research tool.
+        </h2>
+
+        <p class="section-intro">
+            Computational projects spanning numerical PDEs,
+            finite elements, spectral methods, and
+            high-performance scientific computing.
+        </p>
+
+    </div>
+
+</div>
+
+
+<div class="project-list">
+
+    <div class="project">
+
+        <div class="project-number">
+            01
+        </div>
+
+        <div>
+
+            <div class="project-name">
+                Runge–Kutta Methods
+            </div>
+
+            <div class="project-description">
+                Stability, perturbations, mixed precision,
+                and efficient implicit time integration.
+            </div>
+
+        </div>
+
+        <div class="project-arrow">
+            →
+        </div>
+
+    </div>
+
+
+    <div class="project">
+
+        <div class="project-number">
+            02
+        </div>
+
+        <div>
+
+            <div class="project-name">
+                Numerical PDEs
+            </div>
+
+            <div class="project-description">
+                Finite-element, finite-difference, and
+                spectral discretizations of nonlinear PDEs.
+            </div>
+
+        </div>
+
+        <div class="project-arrow">
+            →
+        </div>
+
+    </div>
+
+
+    <div class="project">
+
+        <div class="project-number">
+            03
+        </div>
+
+        <div>
+
+            <div class="project-name">
+                Spectral Methods
+            </div>
+
+            <div class="project-description">
+                Fourier collocation, differentiation operators,
+                and high-order discretizations.
+            </div>
+
+        </div>
+
+        <div class="project-arrow">
+            →
+        </div>
+
+    </div>
+
+
+    <div class="project">
+
+        <div class="project-number">
+            04
+        </div>
+
+        <div>
+
+            <div class="project-name">
+                Finite Element Methods
+            </div>
+
+            <div class="project-description">
+                Mesh generation, generalized eigenvalue problems,
+                and PDE discretization.
+            </div>
+
+        </div>
+
+        <div class="project-arrow">
+            →
+        </div>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+<!-- ================================================================
+     CONTACT
+     ================================================================ -->
+
+<section id="contact">
+
+```
+<div class="section-header">
+
+    <div class="section-number">
+        04 / CONTACT
+    </div>
+
+    <div>
+
+        <h2>
+            Get in touch.
+        </h2>
+
+    </div>
+
+</div>
+
+
+<div class="contact-grid">
+
+    <div>
+
+        <p class="contact-large">
+            Interested in numerical mathematics,
+            scientific computing, or collaborative
+            research?
+        </p>
+
+        <a
+            class="contact-email"
+            href="mailto:jdriscoll9@umassd.edu">
+            jdriscoll9@umassd.edu
+        </a>
+
+    </div>
+
+
+    <div class="contact-side">
+
+        <p>
+            <strong>John Driscoll</strong><br>
+            Ph.D. Candidate<br>
+            Computational Science and Engineering<br>
+            University of Massachusetts Dartmouth
+        </p>
+
+    </div>
+
+</div>
+```
+
+</section>
+
+</main>
+
+<!-- ================================================================
+     FOOTER
+     ================================================================ -->
+
+<footer>
+
+```
+<div class="footer-inner">
+
+    <span>
+        John Driscoll
+    </span>
+
+    <span>
+        Computational Mathematics
+    </span>
+
+    <span>
+        © 2026
+    </span>
+
+</div>
+```
+
+</footer>
+
+</body>
+</html>
