@@ -5,100 +5,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Driscoll</title>
 
 ```
+<title>John Driscoll — Computational Mathematics</title>
+
 <style>
+
     body {
         margin: 0;
         padding: 0;
-        background: white;
-        color: #111;
-        font-family: Arial, Helvetica, sans-serif;
-    }
-
-    .container {
-        width: 900px;
-        max-width: calc(100% - 40px);
-        margin: 40px auto;
-    }
-
-    .hero {
-        width: 100%;
-        margin-bottom: 35px;
-    }
-
-    .hero img {
-        width: 100%;
-        height: auto;
-        display: block;
-    }
-
-    h1 {
-        font-size: 48px;
-        margin: 0 0 8px 0;
-        font-weight: 700;
-        letter-spacing: -1px;
-    }
-
-    .subtitle {
-        font-size: 20px;
-        color: #555;
-        margin-bottom: 30px;
-    }
-
-    h2 {
-        font-size: 25px;
-        margin-top: 40px;
-        margin-bottom: 15px;
-    }
-
-    p {
-        font-size: 17px;
-        line-height: 1.6;
+        background: #eeeeee;
+        color: #000000;
+        font-family: "Times New Roman", Times, serif;
+        font-size: 16px;
     }
 
     a {
-        color: #111;
+        color: #0000ee;
+        text-decoration: underline;
     }
 
-    ul {
-        padding-left: 25px;
+    a:visited {
+        color: #551a8b;
     }
 
-    li {
-        margin-bottom: 25px;
-        line-height: 1.5;
+    a:hover {
+        color: #ff0000;
     }
+
+    .page {
+        width: 850px;
+        max-width: calc(100% - 30px);
+        margin: 25px auto;
+        background: #ffffff;
+        border: 1px solid #888888;
+        box-shadow: 3px 3px 0 #aaaaaa;
+    }
+
+    /* ============================================================
+       HEADER
+       ============================================================ */
+
+    .header {
+        padding: 12px;
+        background: #d4d0c8;
+        border-bottom: 3px ridge #ffffff;
+    }
+
+    .banner {
+        width: 100%;
+        display: block;
+        border: 1px solid #777777;
+        background: #ffffff;
+    }
+
+    .header-links {
+        margin-top: 9px;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+    }
+
+    .header-links a {
+        margin: 0 8px;
+    }
+
+    /* ============================================================
+       CONTENT
+       ============================================================ */
+
+    .content {
+        padding: 25px 35px 30px 35px;
+    }
+
+    .welcome {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        color: #555555;
+        margin-bottom: 18px;
+    }
+
+    h2 {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 20px;
+        color: #003399;
+        margin: 25px 0 8px 0;
+        padding-bottom: 3px;
+        border-bottom: 1px solid #999999;
+    }
+
+    p {
+        margin: 10px 0;
+        line-height: 1.45;
+    }
+
+    .research {
+        font-size: 16px;
+    }
+
+    /* ============================================================
+       PAPERS
+       ============================================================ */
+
+    .papers {
+        margin-top: 10px;
+    }
+
+    .paper {
+        margin: 18px 0 22px 15px;
+    }
+
+    .paper-title {
+        font-weight: bold;
+    }
+
+    .authors {
+        margin-top: 3px;
+        font-size: 15px;
+    }
+
+    /* ============================================================
+       CONTACT
+       ============================================================ */
 
     .contact {
-        margin-top: 40px;
-        padding-top: 25px;
-        border-top: 1px solid #ddd;
+        margin-top: 30px;
     }
+
+    .email {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+    }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
 
     .footer {
-        margin-top: 40px;
-        padding-top: 20px;
-        border-top: 1px solid #ddd;
-        color: #777;
-        font-size: 13px;
+        margin-top: 35px;
+        padding-top: 8px;
+        border-top: 1px solid #999999;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 11px;
+        color: #666666;
     }
+
+    .counter {
+        margin-top: 12px;
+        font-family: "Courier New", monospace;
+        font-size: 11px;
+        color: #555555;
+    }
+
+    /* ============================================================
+       MOBILE
+       ============================================================ */
 
     @media (max-width: 700px) {
-        .container {
-            margin: 25px auto;
-            max-width: calc(100% - 30px);
+
+        body {
+            background: #ffffff;
         }
 
-        h1 {
-            font-size: 38px;
+        .page {
+            width: auto;
+            max-width: none;
+            margin: 0;
+            border: none;
+            box-shadow: none;
         }
 
-        .hero img {
-            width: 100%;
+        .content {
+            padding: 20px;
         }
+
+        .header {
+            padding: 8px;
+        }
+
+        .header-links a {
+            display: inline-block;
+            margin: 3px 5px;
+        }
+
     }
+
 </style>
 ```
 
@@ -106,92 +197,193 @@
 
 <body>
 
-<div class="container">
+<div class="page">
 
 ```
-<!-- Eigenfunction visualization -->
-<div class="hero">
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+
+<div class="header">
+
     <img
+        class="banner"
         src="JOHN_DRISCOLL_eigenfunctions_lmr.png"
-        alt="Dirichlet Laplacian eigenfunctions on the letters JOHN DRISCOLL">
+        alt="JOHN DRISCOLL"
+    >
+
+    <div class="header-links">
+
+        <a href="#research">Research</a>
+        |
+        <a href="#papers">Preprints</a>
+        |
+        <a href="#contact">Contact</a>
+
+    </div>
+
 </div>
 
-<h1>John Driscoll</h1>
 
-<div class="subtitle">
-    Ph.D. Candidate in Computational Science and Engineering
-</div>
+<!-- ============================================================
+     CONTENT
+     ============================================================ -->
 
-<h2>Research</h2>
+<div class="content">
 
-<p>
-    My research is in applied and computational mathematics, with a
-    focus on numerical methods, partial differential equations,
-    scientific computing, and numerical linear algebra.
-</p>
+    <div class="welcome">
+        Welcome to my academic homepage.
+    </div>
 
-<p>
-    My current work focuses on efficient numerical methods
-    for differential equations.
-</p>
 
-<h2>Preprints</h2>
+    <!-- ========================================================
+         RESEARCH
+         ======================================================== -->
 
-<ul>
+    <h2 id="research">
+        Research
+    </h2>
 
-    <li>
-        <a href="https://arxiv.org/abs/2607.10967">
-            <b>
+    <div class="research">
+
+        <p>
+            I am a Ph.D. Candidate in Computational Science and
+            Engineering at the University of Massachusetts Dartmouth.
+        </p>
+
+        <p>
+            My research is in applied and computational mathematics,
+            with a focus on numerical methods, partial differential
+            equations, scientific computing, and numerical linear
+            algebra.
+        </p>
+
+        <p>
+            My current work focuses on efficient numerical methods
+            for differential equations.
+        </p>
+
+    </div>
+
+
+    <!-- ========================================================
+         PREPRINTS
+         ======================================================== -->
+
+    <h2 id="papers">
+        Preprints
+    </h2>
+
+    <div class="papers">
+
+
+        <div class="paper">
+
+            <a
+                class="paper-title"
+                href="https://arxiv.org/abs/2607.10967">
                 Performance Evaluation of Stabilized Corrections
                 for Mixed Precision Runge--Kutta Methods
-            </b>
-        </a>
-        <br>
-        César Herrera, John Driscoll, Sigal Gottlieb,
-        Zachary J. Grant, Tej Sai Kakumanu, Andrew Christlieb
-    </li>
+            </a>
 
-    <li>
-        <a href="https://arxiv.org/abs/2604.14479">
-            <b>
+            <div class="authors">
+                César Herrera, John Driscoll, Sigal Gottlieb,
+                Zachary J. Grant, Tej Sai Kakumanu,
+                Andrew Christlieb
+            </div>
+
+            <div>
+                [<a href="https://arxiv.org/abs/2607.10967">
+                    arXiv
+                </a>]
+            </div>
+
+        </div>
+
+
+        <div class="paper">
+
+            <a
+                class="paper-title"
+                href="https://arxiv.org/abs/2604.14479">
                 Smooth perturbations of diagonally implicit
                 Runge--Kutta methods
-            </b>
-        </a>
-        <br>
-        John Driscoll, Sigal Gottlieb, Zachary J. Grant,
-        César Herrera, Tej Sai Kakumanu, Monica Stephens
-    </li>
+            </a>
 
-    <li>
-        <a href="https://arxiv.org/abs/2603.24451">
-            <b>
+            <div class="authors">
+                John Driscoll, Sigal Gottlieb,
+                Zachary J. Grant, César Herrera,
+                Tej Sai Kakumanu, Monica Stephens
+            </div>
+
+            <div>
+                [<a href="https://arxiv.org/abs/2604.14479">
+                    arXiv
+                </a>]
+            </div>
+
+        </div>
+
+
+        <div class="paper">
+
+            <a
+                class="paper-title"
+                href="https://arxiv.org/abs/2603.24451">
                 Stable corrections for perturbed diagonally implicit
                 Runge--Kutta methods
-            </b>
-        </a>
-        <br>
-        John Driscoll, Sigal Gottlieb, Zachary J. Grant,
-        César Herrera, Tej Sai Kakumanu, Michael H. Sawicki,
-        Monica Stephens
-    </li>
+            </a>
 
-</ul>
+            <div class="authors">
+                John Driscoll, Sigal Gottlieb,
+                Zachary J. Grant, César Herrera,
+                Tej Sai Kakumanu, Michael H. Sawicki,
+                Monica Stephens
+            </div>
 
-<div class="contact">
+            <div>
+                [<a href="https://arxiv.org/abs/2603.24451">
+                    arXiv
+                </a>]
+            </div>
 
-    <h2>Contact</h2>
+        </div>
 
-    <p>
+    </div>
+
+
+    <!-- ========================================================
+         CONTACT
+         ======================================================== -->
+
+    <h2 id="contact">
+        Contact
+    </h2>
+
+    <p class="email">
+
+        Email:
         <a href="mailto:jdriscoll9@umassd.edu">
             jdriscoll9@umassd.edu
         </a>
+
     </p>
 
-</div>
 
-<div class="footer">
-    bye.
+    <!-- ========================================================
+         FOOTER
+         ======================================================== -->
+
+    <div class="footer">
+
+        Last updated August 2026.
+
+        <div class="counter">
+            This page is under construction.
+        </div>
+
+    </div>
+
 </div>
 ```
 
