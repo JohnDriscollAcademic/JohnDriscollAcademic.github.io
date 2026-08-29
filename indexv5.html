@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+```
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>John Driscoll</title>
+
+<style>
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    body {
+
+        background: #f3efe3;
+
+        color: #171713;
+
+        overflow: hidden;
+
+        font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+    }
+
+
+    /* ============================================================
+       NAME
+       ============================================================ */
+
+    .name {
+
+        position: fixed;
+
+        top: 38px;
+        left: 45px;
+
+        width: min(430px, 42vw);
+
+        height: auto;
+
+        z-index: 10;
+
+        /*
+         * The PNG currently has a light background.
+         *
+         * multiply makes that light background blend into
+         * the vanilla page rather than appearing as a rectangle.
+         */
+
+        mix-blend-mode: multiply;
+    }
+
+
+    /* ============================================================
+       PAINTINGS
+       ============================================================ */
+
+    .painting {
+
+        position: fixed;
+
+        z-index: 5;
+
+        margin: 0;
+    }
+
+
+    .painting img {
+
+        display: block;
+
+        width: 100%;
+        height: auto;
+    }
+
+
+    .flowers {
+
+        width: 180px;
+
+        right: 8vw;
+        top: 12vh;
+    }
+
+
+    .still-life {
+
+        width: 205px;
+
+        left: 9vw;
+        bottom: 9vh;
+    }
+
+
+    /* ============================================================
+       PAINTING CAPTIONS
+       ============================================================ */
+
+    .caption {
+
+        margin-top: 7px;
+
+        font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+
+        font-size: 9px;
+
+        line-height: 1.25;
+
+        color: rgba(23, 23, 19, 0.45);
+
+        letter-spacing: 0.01em;
+    }
+
+
+    .caption a {
+
+        color: inherit;
+
+        text-decoration: none;
+    }
+
+
+    .caption a:hover {
+
+        color: #171713;
+    }
+
+
+    /* ============================================================
+       PHYSICS CONTAINER
+       ============================================================ */
+
+    .physics {
+
+        position: fixed;
+
+        inset: 0;
+
+        z-index: 1;
+
+        pointer-events: none;
+    }
+
+
+    /* ============================================================
+       LORENZ CANVAS
+       ============================================================ */
+
+    #canvas {
+
+        position: absolute;
+
+        inset: 0;
+
+        width: 100%;
+        height: 100%;
+
+        opacity: 0.43;
+    }
+
+
+    /* ============================================================
+       EQUATION
+       ============================================================ */
+
+    .equation {
+
+        position: absolute;
+
+        left: 50%;
+
+        bottom: 92px;
+
+        transform: translateX(-50%);
+
+        font-family:
+            Georgia,
+            "Times New Roman",
+            serif;
+
+        font-size: 12px;
+
+        color: rgba(23, 23, 19, 0.44);
+
+        letter-spacing: 0.015em;
+
+        white-space: nowrap;
+    }
+
+
+    /* ============================================================
+       PARAMETER CONTROLS
+       ============================================================ */
+
+    .controls {
+
+        position: absolute;
+
+        left: 50%;
+
+        bottom: 49px;
+
+        transform: translateX(-50%);
+
+        display: flex;
+
+        gap: 20px;
+
+        align-items: center;
+
+        pointer-events: auto;
+
+        font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+        font-size: 9px;
+
+        color: rgba(23, 23, 19, 0.46);
+
+        letter-spacing: 0.05em;
+    }
+
+
+    .controls label {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 5px;
+    }
+
+
+    .controls input {
+
+        width: 48px;
+
+        padding: 2px 1px;
+
+        border: none;
+
+        border-bottom:
+            1px solid rgba(23, 23, 19, 0.24);
+
+        background: transparent;
+
+        outline: none;
+
+        font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+        font-size: 9px;
+
+        color: #171713;
+    }
+
+
+    .controls input:focus {
+
+        border-bottom-color: #171713;
+    }
+
+
+    /* Remove number-spinner arrows */
+
+    .controls input::-webkit-inner-spin-button,
+    .controls input::-webkit-outer-spin-button {
+
+        -webkit-appearance: none;
+
+        margin: 0;
+    }
+
+
+    /* ============================================================
+       NAVIGATION
+       ============================================================ */
+
+    nav {
+
+        position: fixed;
+
+        bottom: 38px;
+
+        right: 45px;
+
+        z-index: 10;
+
+        display: flex;
+
+        gap: 22px;
+
+        font-family:
+            Arial,
+            Helvetica,
+            sans-serif;
+
+        font-size: 10px;
+
+        letter-spacing: 0.12em;
+
+        text-transform: uppercase;
+    }
+
+
+    nav a {
+
+        color: #171713;
+
+        text-decoration: none;
+    }
+
+
+    nav a:hover {
+
+        opacity: 0.4;
+    }
+
+
+    /* ============================================================
+       MOBILE
+       ============================================================ */
+
+    @media (max-width: 700px) {
+
+        body {
+
+            overflow: hidden;
+        }
+
+
+        .name {
+
+            top: 24px;
+
+            left: 24px;
+
+            width: 270px;
+
+            max-width: 70vw;
+        }
+
+
+        .flowers {
+
+            width: 125px;
+
+            right: 7vw;
+
+            top: 17vh;
+        }
+
+
+        .still-life {
+
+            width: 145px;
+
+            left: 7vw;
+
+            bottom: 14vh;
+        }
+
+
+        .caption {
+
+            font-size: 8px;
+        }
+
+
+        .equation {
+
+            font-size: 9px;
+
+            bottom: 87px;
+        }
+
+
+        .controls {
+
+            bottom: 47px;
+
+            gap: 12px;
+        }
+
+
+        nav {
+
+            bottom: 23px;
+
+            right: 24px;
+        }
+
+    }
+
+</style>
+```
+
+</head>
+
+<body>
+
+```
+<!-- ============================================================
+     NAME
+     ============================================================ -->
+
+<img
+    class="name"
+    src="JOHN_DRISCOLL_eigenfunctions_lmr.png"
+    alt="John Driscoll"
+>
+
+
+<!-- ============================================================
+     MONET — FLOWERS
+     ============================================================ -->
+
+<figure class="painting flowers">
+
+    <img
+        src="flowers.webp"
+        alt=""
+    >
+
+    <figcaption class="caption">
+
+        Monet —
+        <a
+            href="https://www.dreamdeepbaby.com/collections/artichoke-flowers"
+            target="_blank"
+            rel="noopener"
+        >
+            Jerusalem Artichoke Flowers
+        </a>
+
+    </figcaption>
+
+</figure>
+
+
+<!-- ============================================================
+     MONET — STILL LIFE
+     ============================================================ -->
+
+<figure class="painting still-life">
+
+    <img
+        src="still_life.webp"
+        alt=""
+    >
+
+    <figcaption class="caption">
+
+        Monet —
+        <a
+            href="https://www.dreamdeepbaby.com/collections/still-life"
+            target="_blank"
+            rel="noopener"
+        >
+            Still Life with Flowers and Fruit
+        </a>
+
+    </figcaption>
+
+</figure>
+
+
+<!-- ============================================================
+     PHYSICS
+     ============================================================ -->
+
+<div class="physics">
+
+    <canvas id="canvas"></canvas>
+
+
+    <!-- Dynamical system -->
+
+    <div class="equation">
+
+        ẋ = σ(y − x)
+        &nbsp;&nbsp;&nbsp;
+        ẏ = x(ρ − z) − y
+        &nbsp;&nbsp;&nbsp;
+        ż = xy − βz
+
+    </div>
+
+
+    <!-- Parameters -->
+
+    <div class="controls">
+
+        <label>
+
+            σ
+
+            <input
+                id="sigma"
+                type="number"
+                value="10"
+                step="0.1"
+            >
+
+        </label>
+
+
+        <label>
+
+            ρ
+
+            <input
+                id="rho"
+                type="number"
+                value="28"
+                step="0.1"
+            >
+
+        </label>
+
+
+        <label>
+
+            β
+
+            <input
+                id="beta"
+                type="number"
+                value="2.6667"
+                step="0.01"
+            >
+
+        </label>
+
+    </div>
+
+</div>
+
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+
+<nav>
+
+    <a href="research.html">
+        Research
+    </a>
+
+    <a href="cv.html">
+        CV
+    </a>
+
+</nav>
+
+
+<script>
+
+
+    /* ============================================================
+       CANVAS
+       ============================================================ */
+
+    const canvas =
+        document.getElementById("canvas");
+
+    const ctx =
+        canvas.getContext("2d");
+
+
+    let width;
+    let height;
+    let dpr;
+
+
+    function resize() {
+
+        dpr =
+            window.devicePixelRatio || 1;
+
+        width =
+            window.innerWidth;
+
+        height =
+            window.innerHeight;
+
+
+        canvas.width =
+            width * dpr;
+
+        canvas.height =
+            height * dpr;
+
+
+        canvas.style.width =
+            width + "px";
+
+        canvas.style.height =
+            height + "px";
+
+
+        ctx.setTransform(
+            dpr,
+            0,
+            0,
+            dpr,
+            0,
+            0
+        );
+    }
+
+
+    window.addEventListener(
+        "resize",
+        resize
+    );
+
+
+    resize();
+
+
+    /* ============================================================
+       LORENZ PARAMETERS
+       ============================================================ */
+
+    let sigma = 10;
+
+    let rho = 28;
+
+    let beta = 8 / 3;
+
+
+    const sigmaInput =
+        document.getElementById("sigma");
+
+    const rhoInput =
+        document.getElementById("rho");
+
+    const betaInput =
+        document.getElementById("beta");
+
+
+    /* ============================================================
+       STATE
+       ============================================================ */
+
+    let x = 0.1;
+    let y = 0;
+    let z = 0;
+
+
+    const points = [];
+
+    const maxPoints = 7000;
+
+
+    /* ============================================================
+       PARAMETER UPDATE
+       ============================================================ */
+
+    function updateParameters() {
+
+        const newSigma =
+            parseFloat(sigmaInput.value);
+
+        const newRho =
+            parseFloat(rhoInput.value);
+
+        const newBeta =
+            parseFloat(betaInput.value);
+
+
+        if (
+            Number.isFinite(newSigma) &&
+            Number.isFinite(newRho) &&
+            Number.isFinite(newBeta)
+        ) {
+
+            sigma = newSigma;
+
+            rho = newRho;
+
+            beta = newBeta;
+
+
+            /*
+             * Restart the trajectory.
+             */
+
+            points.length = 0;
+
+            x = 0.1;
+            y = 0;
+            z = 0;
+        }
+    }
+
+
+    sigmaInput.addEventListener(
+        "input",
+        updateParameters
+    );
+
+
+    rhoInput.addEventListener(
+        "input",
+        updateParameters
+    );
+
+
+    betaInput.addEventListener(
+        "input",
+        updateParameters
+    );
+
+
+    /* ============================================================
+       LORENZ VECTOR FIELD
+       ============================================================ */
+
+    function lorenz(x, y, z) {
+
+        return {
+
+            x:
+                sigma * (y - x),
+
+            y:
+                x * (rho - z) - y,
+
+            z:
+                x * y - beta * z
+
+        };
+    }
+
+
+    /* ============================================================
+       RK4
+       ============================================================ */
+
+    function step(dt) {
+
+        const k1 =
+            lorenz(x, y, z);
+
+
+        const k2 =
+            lorenz(
+                x + 0.5 * dt * k1.x,
+                y + 0.5 * dt * k1.y,
+                z + 0.5 * dt * k1.z
+            );
+
+
+        const k3 =
+            lorenz(
+                x + 0.5 * dt * k2.x,
+                y + 0.5 * dt * k2.y,
+                z + 0.5 * dt * k2.z
+            );
+
+
+        const k4 =
+            lorenz(
+                x + dt * k3.x,
+                y + dt * k3.y,
+                z + dt * k3.z
+            );
+
+
+        x +=
+            dt / 6 *
+            (
+                k1.x +
+                2 * k2.x +
+                2 * k3.x +
+                k4.x
+            );
+
+
+        y +=
+            dt / 6 *
+            (
+                k1.y +
+                2 * k2.y +
+                2 * k3.y +
+                k4.y
+            );
+
+
+        z +=
+            dt / 6 *
+            (
+                k1.z +
+                2 * k2.z +
+                2 * k3.z +
+                k4.z
+            );
+
+
+        points.push({
+            x: x,
+            y: y,
+            z: z
+        });
+
+
+        if (
+            points.length >
+            maxPoints
+        ) {
+
+            points.shift();
+        }
+    }
+
+
+    /* ============================================================
+       DRAW
+       ============================================================ */
+
+    function draw() {
+
+        ctx.clearRect(
+            0,
+            0,
+            width,
+            height
+        );
+
+
+        /*
+         * Slow rotation gives the attractor
+         * a subtle three-dimensional character.
+         */
+
+        const angle =
+            performance.now() *
+            0.000045;
+
+
+        const cosA =
+            Math.cos(angle);
+
+        const sinA =
+            Math.sin(angle);
+
+
+        /*
+         * Large central attractor.
+         */
+
+        const scale =
+            Math.min(
+                width,
+                height
+            ) / 47;
+
+
+        ctx.beginPath();
+
+
+        for (
+            let i = 0;
+            i < points.length;
+            i++
+        ) {
+
+            const p =
+                points[i];
+
+
+            const rx =
+                p.x * cosA -
+                p.z * sinA;
+
+
+            const rz =
+                p.x * sinA +
+                p.z * cosA;
+
+
+            /*
+             * Mild perspective.
+             */
+
+            const perspective =
+                1 /
+                (
+                    1 +
+                    rz * 0.002
+                );
+
+
+            const px =
+                width / 2 +
+                rx *
+                scale *
+                perspective;
+
+
+            const py =
+                height / 2 -
+                p.y *
+                scale *
+                0.60 *
+                perspective;
+
+
+            if (i === 0) {
+
+                ctx.moveTo(
+                    px,
+                    py
+                );
+
+            } else {
+
+                ctx.lineTo(
+                    px,
+                    py
+                );
+            }
+        }
+
+
+        ctx.strokeStyle =
+            "#171713";
+
+        ctx.lineWidth =
+            0.55;
+
+        ctx.stroke();
+    }
+
+
+    /* ============================================================
+       ANIMATION
+       ============================================================ */
+
+    function animate() {
+
+        /*
+         * Multiple RK4 steps per frame.
+         */
+
+        for (
+            let i = 0;
+            i < 6;
+            i++
+        ) {
+
+            step(0.006);
+        }
+
+
+        draw();
+
+
+        requestAnimationFrame(
+            animate
+        );
+    }
+
+
+    animate();
+
+</script>
+```
+
+</body>
+
+</html>
