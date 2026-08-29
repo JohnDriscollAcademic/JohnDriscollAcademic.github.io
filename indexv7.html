@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>John Driscoll</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            background: #f4f0e6;
+            color: #171714;
+            overflow: hidden;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        /* ------------------------------------------------------------
+           NAME
+        ------------------------------------------------------------ */
+
+        .name {
+            position: fixed;
+            top: 35px;
+            left: 45px;
+            z-index: 10;
+
+            width: min(390px, 42vw);
+
+            mix-blend-mode: multiply;
+        }
+
+        .name img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        /* ------------------------------------------------------------
+           SIMULATION
+        ------------------------------------------------------------ */
+
+        #simulation {
+            position: fixed;
+
+            left: 50%;
+            top: 48%;
+
+            transform: translate(-50%, -50%);
+
+            width: min(760px, 72vw);
+            height: min(500px, 55vh);
+
+            z-index: 1;
+        }
+
+        #canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* ------------------------------------------------------------
+           EQUATION / PARAMETERS
+        ------------------------------------------------------------ */
+
+        .info {
+            position: fixed;
+
+            left: 50%;
+            bottom: 55px;
+
+            transform: translateX(-50%);
+
+            z-index: 10;
+
+            text-align: center;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.08em;
+
+            color: rgba(23,23,20,0.55);
+        }
+
+        .equation {
+            margin-bottom: 13px;
+
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 15px;
+
+            letter-spacing: 0.02em;
+
+            color: rgba(23,23,20,0.58);
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            gap: 18px;
+        }
+
+        .control {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .control label {
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        input {
+            width: 55px;
+
+            border: none;
+            border-bottom: 1px solid rgba(23,23,20,0.3);
+
+            background: transparent;
+
+            outline: none;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 10px;
+
+            color: #171714;
+
+            padding: 2px 0;
+
+            text-align: center;
+        }
+
+        /* Remove number input arrows */
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        /* ------------------------------------------------------------
+           NAV
+        ------------------------------------------------------------ */
+
+        nav {
+            position: fixed;
+
+            bottom: 35px;
+            right: 45px;
+
+            z-index: 10;
+
+            display: flex;
+            gap: 20px;
+
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 9px;
+
+            letter-spacing: 0.13em;
+            text-transform: uppercase;
+        }
+
+        nav a {
+            color: rgba(23,23,20,0.65);
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            opacity: 0.4;
+        }
+
+        /* ------------------------------------------------------------
+           MOBILE
+        ------------------------------------------------------------ */
+
+        @media (max-width: 700px) {
+
+            .name {
+                top: 25px;
+                left: 25px;
+                width: 260px;
+            }
+
+            #simulation {
+                width: 92vw;
+                height: 55vh;
+
+                top: 47%;
+            }
+
+            .info {
+                bottom: 70px;
+            }
+
+            nav {
+                bottom: 25px;
+                right: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAME -->
+
+    <div class="name">
+        <img
+            src="JOHN_DRISCOLL_eigenfunctions_lmr.png"
+            alt="John Driscoll"
+        >
+    </div>
+
+
+    <!-- BROWNIAN MOTION -->
+
+    <div id="simulation">
+        <canvas id="canvas"></canvas>
+    </div>
+
+
+    <!-- EQUATION + PARAMETERS -->
+
+    <div class="info">
+
+        <div class="equation">
+            dX<sub>t</sub> = √(2D) dW<sub>t</sub>
+        </div>
+
+        <div class="controls">
+
+            <div class="control">
+                <label for="diffusion">D</label>
+                <input
+                    id="diffusion"
+                    type="number"
+                    value="1.0"
+                    min="0.01"
+                    max="10"
+                    step="0.1"
+                >
+            </div>
+
+            <div class="control">
+                <label for="particles">N</label>
+                <input
+                    id="particles"
+                    type="number"
+                    value="160"
+                    min="10"
+                    max="500"
+                    step="10"
+                >
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <a href="research.html">Research</a>
+        <a href="cv.html">CV</a>
+    </nav>
+
+
+    <script>
+
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+
+        const simulation = document.getElementById("simulation");
+
+        const diffusionInput =
+            document.getElementById("diffusion");
+
+        const particlesInput =
+            document.getElementById("particles");
+
+
+        let width;
+        let height;
+
+        let particles = [];
+
+
+        /* ------------------------------------------------------------
+           CANVAS RESIZING
+        ------------------------------------------------------------ */
+
+        function resize() {
+
+            const dpr = window.devicePixelRatio || 1;
+
+            width = simulation.clientWidth;
+            height = simulation.clientHeight;
+
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+
+            canvas.style.width = width + "px";
+            canvas.style.height = height + "px";
+
+            ctx.setTransform(
+                dpr,
+                0,
+                0,
+                dpr,
+                0,
+                0
+            );
+        }
+
+
+        window.addEventListener("resize", resize);
+
+        resize();
+
+
+        /* ------------------------------------------------------------
+           GAUSSIAN RANDOM VARIABLE
+           
+           Box-Muller transform.
+        ------------------------------------------------------------ */
+
+        function gaussian() {
+
+            let u = 0;
+            let v = 0;
+
+            while (u === 0) {
+                u = Math.random();
+            }
+
+            while (v === 0) {
+                v = Math.random();
+            }
+
+            return Math.sqrt(-2 * Math.log(u))
+                * Math.cos(2 * Math.PI * v);
+        }
+
+
+        /* ------------------------------------------------------------
+           CREATE PARTICLES
+        ------------------------------------------------------------ */
+
+        function createParticles() {
+
+            const N =
+                parseInt(particlesInput.value);
+
+            particles = [];
+
+            for (let i = 0; i < N; i++) {
+
+                particles.push({
+
+                    x: width / 2,
+                    y: height / 2,
+
+                    history: []
+
+                });
+
+            }
+        }
+
+
+        createParticles();
+
+
+        /* ------------------------------------------------------------
+           BROWNIAN MOTION
+           
+           dX = sqrt(2D) dW
+           
+           In discrete form:
+           
+           X_(n+1)
+             = X_n + sqrt(2D dt) * N(0,1)
+        ------------------------------------------------------------ */
+
+        function step() {
+
+            const D =
+                parseFloat(diffusionInput.value) || 1;
+
+            const dt = 0.7;
+
+            const sigma =
+                Math.sqrt(2 * D * dt);
+
+
+            for (const p of particles) {
+
+                p.x += sigma * gaussian();
+                p.y += sigma * gaussian();
+
+
+                p.history.push({
+                    x: p.x,
+                    y: p.y
+                });
+
+
+                /*
+                 * Keep only a short trajectory.
+                 */
+
+                if (p.history.length > 90) {
+                    p.history.shift();
+                }
+
+
+                /*
+                 * Wrap particles around the boundary.
+                 */
+
+                if (p.x < 0) p.x = width;
+                if (p.x > width) p.x = 0;
+
+                if (p.y < 0) p.y = height;
+                if (p.y > height) p.y = 0;
+            }
+        }
+
+
+        /* ------------------------------------------------------------
+           DRAW
+        ------------------------------------------------------------ */
+
+        function draw() {
+
+            ctx.clearRect(
+                0,
+                0,
+                width,
+                height
+            );
+
+
+            /*
+             * Tiny coordinate axes.
+             */
+
+            ctx.beginPath();
+
+            ctx.moveTo(
+                width / 2 - 24,
+                height / 2
+            );
+
+            ctx.lineTo(
+                width / 2 + 24,
+                height / 2
+            );
+
+            ctx.moveTo(
+                width / 2,
+                height / 2 - 24
+            );
+
+            ctx.lineTo(
+                width / 2,
+                height / 2 + 24
+            );
+
+            ctx.strokeStyle =
+                "rgba(23,23,20,0.14)";
+
+            ctx.lineWidth = 0.5;
+
+            ctx.stroke();
+
+
+            /*
+             * Particle trajectories.
+             */
+
+            for (const p of particles) {
+
+                if (p.history.length < 2)
+                    continue;
+
+                ctx.beginPath();
+
+                for (
+                    let i = 0;
+                    i < p.history.length;
+                    i++
+                ) {
+
+                    const q = p.history[i];
+
+                    if (i === 0) {
+
+                        ctx.moveTo(
+                            q.x,
+                            q.y
+                        );
+
+                    } else {
+
+                        ctx.lineTo(
+                            q.x,
+                            q.y
+                        );
+                    }
+                }
+
+                ctx.strokeStyle =
+                    "rgba(23,23,20,0.075)";
+
+                ctx.lineWidth = 0.45;
+
+                ctx.stroke();
+
+
+                /*
+                 * Current particle.
+                 */
+
+                const last =
+                    p.history[p.history.length - 1];
+
+                ctx.beginPath();
+
+                ctx.arc(
+                    last.x,
+                    last.y,
+                    1.1,
+                    0,
+                    Math.PI * 2
+                );
+
+                ctx.fillStyle =
+                    "rgba(23,23,20,0.32)";
+
+                ctx.fill();
+            }
+        }
+
+
+        /* ------------------------------------------------------------
+           ANIMATION
+        ------------------------------------------------------------ */
+
+        function animate() {
+
+            for (let i = 0; i < 3; i++) {
+                step();
+            }
+
+            draw();
+
+            requestAnimationFrame(animate);
+        }
+
+
+        animate();
+
+
+        /* ------------------------------------------------------------
+           PARAMETERS
+        ------------------------------------------------------------ */
+
+        particlesInput.addEventListener(
+            "change",
+            createParticles
+        );
+
+    </script>
+
+</body>
+</html>
