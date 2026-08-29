@@ -1,0 +1,224 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>John Driscoll</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: #f7f6f2;
+            color: #171717;
+            font-family: Georgia, "Times New Roman", serif;
+            min-height: 100vh;
+        }
+
+        .page {
+            width: min(1200px, 90vw);
+            margin: 0 auto;
+        }
+
+        /* NAME */
+
+        header {
+            padding: 42px 0 34px;
+            border-bottom: 1px solid #d8d6d0;
+        }
+
+        .name {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: clamp(2.5rem, 6vw, 5.5rem);
+            font-weight: 300;
+            letter-spacing: -0.055em;
+            line-height: 0.9;
+            margin: 0;
+        }
+
+        /* MAIN */
+
+        main {
+            display: grid;
+            grid-template-columns: 1fr 220px;
+            gap: 90px;
+            padding: 80px 0 100px;
+        }
+
+        .intro {
+            max-width: 650px;
+        }
+
+        .intro p {
+            font-size: 1.15rem;
+            line-height: 1.7;
+            margin: 0 0 28px;
+        }
+
+        .links {
+            display: flex;
+            gap: 28px;
+            margin-top: 42px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.78rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .links a {
+            color: #171717;
+            text-decoration: none;
+            border-bottom: 1px solid #171717;
+            padding-bottom: 3px;
+        }
+
+        .links a:hover {
+            opacity: 0.5;
+        }
+
+        /* PAINTINGS */
+
+        .paintings {
+            display: flex;
+            flex-direction: column;
+            gap: 55px;
+            padding-top: 5px;
+        }
+
+        .painting {
+            margin: 0;
+        }
+
+        .painting img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .painting figcaption {
+            margin-top: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #77756f;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid #d8d6d0;
+            padding: 22px 0 35px;
+            display: flex;
+            justify-content: space-between;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #77756f;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 750px) {
+            header {
+                padding-top: 28px;
+            }
+
+            main {
+                display: block;
+                padding: 55px 0 70px;
+            }
+
+            .intro {
+                max-width: 100%;
+            }
+
+            .paintings {
+                margin-top: 70px;
+                width: 65%;
+                margin-left: auto;
+            }
+
+            .links {
+                flex-wrap: wrap;
+            }
+
+            footer {
+                display: block;
+            }
+
+            footer span {
+                display: block;
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <header>
+            <h1 class="name">John Driscoll</h1>
+        </header>
+
+        <main>
+
+            <section class="intro">
+
+                <p>
+                    Applied mathematician working in numerical analysis,
+                    scientific computing, and computational science.
+                </p>
+
+                <p>
+                    Research interests include numerical methods for
+                    differential equations, iterative methods, and
+                    high-performance scientific computing.
+                </p>
+
+                <nav class="links">
+                    <a href="research.html">Research</a>
+                    <a href="cv.html">CV</a>
+                    <a href="mailto:your@email.com">Contact</a>
+                </nav>
+
+            </section>
+
+            <aside class="paintings">
+
+                <figure class="painting">
+                    <img src="flowers.webp" alt="Flowers">
+                    <figcaption>Flowers</figcaption>
+                </figure>
+
+                <figure class="painting">
+                    <img src="still_life.webp" alt="Still life">
+                    <figcaption>Still Life</figcaption>
+                </figure>
+
+            </aside>
+
+        </main>
+
+        <footer>
+            <span>Mathematics · Scientific Computing</span>
+            <span>2026</span>
+        </footer>
+
+    </div>
+
+</body>
+</html>
+```
