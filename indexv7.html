@@ -7,6 +7,7 @@
     <title>John Driscoll</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -24,14 +25,17 @@
             font-family: Georgia, "Times New Roman", serif;
         }
 
-        /* ------------------------------------------------------------
+
+        /* ============================================================
            NAME
-        ------------------------------------------------------------ */
+        ============================================================ */
 
         .name {
             position: fixed;
+
             top: 35px;
             left: 45px;
+
             z-index: 10;
 
             width: min(390px, 42vw);
@@ -41,107 +45,139 @@
 
         .name img {
             display: block;
+
             width: 100%;
             height: auto;
         }
 
-        /* ------------------------------------------------------------
+
+        /* ============================================================
            SIMULATION
-        ------------------------------------------------------------ */
+        ============================================================ */
 
         #simulation {
             position: fixed;
 
             left: 50%;
-            top: 48%;
+            top: 47%;
 
             transform: translate(-50%, -50%);
 
-            width: min(760px, 72vw);
-            height: min(500px, 55vh);
+            width: min(690px, 65vw);
+            height: min(450px, 52vh);
 
             z-index: 1;
+
+            border: 0.6px solid rgba(23,23,20,0.22);
         }
 
         #canvas {
+            display: block;
+
             width: 100%;
             height: 100%;
-            display: block;
         }
 
-        /* ------------------------------------------------------------
-           EQUATION / PARAMETERS
-        ------------------------------------------------------------ */
+
+        /* ============================================================
+           CONTROLS
+        ============================================================ */
 
         .info {
             position: fixed;
 
-            left: 50%;
-            bottom: 55px;
+            right: 45px;
+            top: 50%;
 
-            transform: translateX(-50%);
+            transform: translateY(-50%);
+
+            width: 155px;
 
             z-index: 10;
 
-            text-align: center;
-
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
-            letter-spacing: 0.08em;
 
             color: rgba(23,23,20,0.55);
         }
 
+
         .equation {
-            margin-bottom: 13px;
+            margin-bottom: 18px;
 
             font-family: Georgia, "Times New Roman", serif;
+
             font-size: 15px;
 
-            letter-spacing: 0.02em;
+            letter-spacing: 0.01em;
 
-            color: rgba(23,23,20,0.58);
+            color: rgba(23,23,20,0.62);
         }
+
+
+        .description {
+            margin-bottom: 24px;
+
+            font-size: 9px;
+
+            line-height: 1.6;
+
+            letter-spacing: 0.04em;
+
+            color: rgba(23,23,20,0.45);
+        }
+
 
         .controls {
             display: flex;
-            justify-content: center;
-            align-items: center;
 
-            gap: 18px;
+            flex-direction: column;
+
+            gap: 13px;
         }
+
 
         .control {
             display: flex;
+
             align-items: center;
-            gap: 7px;
+
+            justify-content: space-between;
+
+            gap: 10px;
         }
+
 
         .control label {
             font-size: 9px;
+
             letter-spacing: 0.12em;
+
             text-transform: uppercase;
         }
+
 
         input {
             width: 55px;
 
             border: none;
-            border-bottom: 1px solid rgba(23,23,20,0.3);
+
+            border-bottom: 1px solid rgba(23,23,20,0.30);
 
             background: transparent;
 
             outline: none;
 
             font-family: Arial, Helvetica, sans-serif;
+
             font-size: 10px;
 
             color: #171714;
 
-            padding: 2px 0;
+            padding: 3px 0;
 
-            text-align: center;
+            text-align: right;
         }
+
 
         /* Remove number input arrows */
 
@@ -155,9 +191,10 @@
             -moz-appearance: textfield;
         }
 
-        /* ------------------------------------------------------------
-           NAV
-        ------------------------------------------------------------ */
+
+        /* ============================================================
+           NAVIGATION
+        ============================================================ */
 
         nav {
             position: fixed;
@@ -168,17 +205,21 @@
             z-index: 10;
 
             display: flex;
+
             gap: 20px;
 
             font-family: Arial, Helvetica, sans-serif;
+
             font-size: 9px;
 
             letter-spacing: 0.13em;
+
             text-transform: uppercase;
         }
 
         nav a {
             color: rgba(23,23,20,0.65);
+
             text-decoration: none;
         }
 
@@ -186,27 +227,58 @@
             opacity: 0.4;
         }
 
-        /* ------------------------------------------------------------
+
+        /* ============================================================
            MOBILE
-        ------------------------------------------------------------ */
+        ============================================================ */
+
+        @media (max-width: 900px) {
+
+            .info {
+                right: 25px;
+                width: 130px;
+            }
+
+            #simulation {
+                width: 70vw;
+            }
+        }
+
 
         @media (max-width: 700px) {
 
             .name {
                 top: 25px;
                 left: 25px;
+
                 width: 260px;
             }
 
             #simulation {
-                width: 92vw;
-                height: 55vh;
+                width: 88vw;
+                height: 50vh;
 
-                top: 47%;
+                top: 46%;
             }
 
             .info {
+                top: auto;
                 bottom: 70px;
+
+                right: 25px;
+
+                width: 135px;
+
+                transform: none;
+            }
+
+            .equation {
+                font-size: 13px;
+                margin-bottom: 10px;
+            }
+
+            .description {
+                display: none;
             }
 
             nav {
@@ -214,40 +286,72 @@
                 right: 25px;
             }
         }
+
     </style>
 </head>
 
+
 <body>
 
-    <!-- NAME -->
+
+    <!-- ============================================================
+         NAME
+    ============================================================ -->
 
     <div class="name">
+
         <img
             src="JOHN_DRISCOLL_eigenfunctions_lmr.png"
             alt="John Driscoll"
         >
+
     </div>
 
 
-    <!-- BROWNIAN MOTION -->
+    <!-- ============================================================
+         BROWNIAN MOTION
+    ============================================================ -->
 
     <div id="simulation">
+
         <canvas id="canvas"></canvas>
+
     </div>
 
 
-    <!-- EQUATION + PARAMETERS -->
+    <!-- ============================================================
+         EQUATION / DESCRIPTION / CONTROLS
+    ============================================================ -->
 
     <div class="info">
 
+
         <div class="equation">
+
             dX<sub>t</sub> = √(2D) dW<sub>t</sub>
+
         </div>
+
+
+        <div class="description">
+
+            Brownian motion describes the
+            random motion of particles
+            undergoing continuous thermal
+            fluctuations.
+
+        </div>
+
 
         <div class="controls">
 
+
             <div class="control">
-                <label for="diffusion">D</label>
+
+                <label for="diffusion">
+                    D
+                </label>
+
                 <input
                     id="diffusion"
                     type="number"
@@ -256,10 +360,16 @@
                     max="10"
                     step="0.1"
                 >
+
             </div>
 
+
             <div class="control">
-                <label for="particles">N</label>
+
+                <label for="particles">
+                    N
+                </label>
+
                 <input
                     id="particles"
                     type="number"
@@ -268,27 +378,48 @@
                     max="500"
                     step="10"
                 >
+
             </div>
+
 
         </div>
 
     </div>
 
 
-    <!-- NAVIGATION -->
+    <!-- ============================================================
+         NAVIGATION
+    ============================================================ -->
 
     <nav>
-        <a href="research.html">Research</a>
-        <a href="cv.html">CV</a>
+
+        <a href="research.html">
+            Research
+        </a>
+
+        <a href="cv.html">
+            CV
+        </a>
+
     </nav>
 
 
     <script>
 
-        const canvas = document.getElementById("canvas");
-        const ctx = canvas.getContext("2d");
 
-        const simulation = document.getElementById("simulation");
+        /* ============================================================
+           CANVAS
+        ============================================================ */
+
+        const canvas =
+            document.getElementById("canvas");
+
+        const ctx =
+            canvas.getContext("2d");
+
+        const simulation =
+            document.getElementById("simulation");
+
 
         const diffusionInput =
             document.getElementById("diffusion");
@@ -303,22 +434,35 @@
         let particles = [];
 
 
-        /* ------------------------------------------------------------
-           CANVAS RESIZING
-        ------------------------------------------------------------ */
+        /* ============================================================
+           RESIZE
+        ============================================================ */
 
         function resize() {
 
-            const dpr = window.devicePixelRatio || 1;
+            const dpr =
+                window.devicePixelRatio || 1;
 
-            width = simulation.clientWidth;
-            height = simulation.clientHeight;
+            width =
+                simulation.clientWidth;
 
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
+            height =
+                simulation.clientHeight;
 
-            canvas.style.width = width + "px";
-            canvas.style.height = height + "px";
+
+            canvas.width =
+                width * dpr;
+
+            canvas.height =
+                height * dpr;
+
+
+            canvas.style.width =
+                width + "px";
+
+            canvas.style.height =
+                height + "px";
+
 
             ctx.setTransform(
                 dpr,
@@ -328,24 +472,48 @@
                 0,
                 0
             );
+
+
+            /*
+             * Keep particles inside the new domain.
+             */
+
+            for (const p of particles) {
+
+                p.x = Math.min(
+                    Math.max(p.x, 0),
+                    width
+                );
+
+                p.y = Math.min(
+                    Math.max(p.y, 0),
+                    height
+                );
+
+            }
+
         }
 
 
-        window.addEventListener("resize", resize);
+        window.addEventListener(
+            "resize",
+            resize
+        );
 
         resize();
 
 
-        /* ------------------------------------------------------------
+        /* ============================================================
            GAUSSIAN RANDOM VARIABLE
            
            Box-Muller transform.
-        ------------------------------------------------------------ */
+        ============================================================ */
 
         function gaussian() {
 
             let u = 0;
             let v = 0;
+
 
             while (u === 0) {
                 u = Math.random();
@@ -355,21 +523,31 @@
                 v = Math.random();
             }
 
-            return Math.sqrt(-2 * Math.log(u))
-                * Math.cos(2 * Math.PI * v);
+
+            return Math.sqrt(
+                -2 * Math.log(u)
+            ) *
+            Math.cos(
+                2 * Math.PI * v
+            );
+
         }
 
 
-        /* ------------------------------------------------------------
+        /* ============================================================
            CREATE PARTICLES
-        ------------------------------------------------------------ */
+        ============================================================ */
 
         function createParticles() {
 
             const N =
-                parseInt(particlesInput.value);
+                parseInt(
+                    particlesInput.value
+                ) || 160;
+
 
             particles = [];
+
 
             for (let i = 0; i < N; i++) {
 
@@ -378,76 +556,138 @@
                     x: width / 2,
                     y: height / 2,
 
-                    history: []
+                    history: [],
+
+                    /*
+                     * Used to detect wrapping.
+                     */
+
+                    wrapped: false
 
                 });
 
             }
+
         }
 
 
         createParticles();
 
 
-        /* ------------------------------------------------------------
+        /* ============================================================
            BROWNIAN MOTION
            
            dX = sqrt(2D) dW
-           
-           In discrete form:
-           
-           X_(n+1)
-             = X_n + sqrt(2D dt) * N(0,1)
-        ------------------------------------------------------------ */
+        ============================================================ */
 
         function step() {
 
             const D =
-                parseFloat(diffusionInput.value) || 1;
+                parseFloat(
+                    diffusionInput.value
+                ) || 1;
+
 
             const dt = 0.7;
 
+
             const sigma =
-                Math.sqrt(2 * D * dt);
+                Math.sqrt(
+                    2 * D * dt
+                );
 
 
             for (const p of particles) {
 
-                p.x += sigma * gaussian();
-                p.y += sigma * gaussian();
+                const oldX = p.x;
+                const oldY = p.y;
 
 
-                p.history.push({
-                    x: p.x,
-                    y: p.y
-                });
+                p.x +=
+                    sigma * gaussian();
+
+                p.y +=
+                    sigma * gaussian();
+
+
+                p.wrapped = false;
 
 
                 /*
-                 * Keep only a short trajectory.
+                 * Periodic boundary conditions.
+                 *
+                 * Mark particles that crossed the
+                 * boundary so their trajectory isn't
+                 * drawn across the entire box.
                  */
 
-                if (p.history.length > 90) {
-                    p.history.shift();
+                if (p.x < 0) {
+
+                    p.x = width;
+
+                    p.wrapped = true;
+
+                }
+
+
+                if (p.x > width) {
+
+                    p.x = 0;
+
+                    p.wrapped = true;
+
+                }
+
+
+                if (p.y < 0) {
+
+                    p.y = height;
+
+                    p.wrapped = true;
+
+                }
+
+
+                if (p.y > height) {
+
+                    p.y = 0;
+
+                    p.wrapped = true;
+
                 }
 
 
                 /*
-                 * Wrap particles around the boundary.
+                 * Store trajectory point.
                  */
 
-                if (p.x < 0) p.x = width;
-                if (p.x > width) p.x = 0;
+                p.history.push({
 
-                if (p.y < 0) p.y = height;
-                if (p.y > height) p.y = 0;
+                    x: p.x,
+                    y: p.y,
+                    wrapped: p.wrapped
+
+                });
+
+
+                /*
+                 * Keep trajectories short.
+                 */
+
+                if (p.history.length > 100) {
+
+                    p.history.shift();
+
+                }
+
             }
+
         }
 
 
-        /* ------------------------------------------------------------
+        /* ============================================================
            DRAW
-        ------------------------------------------------------------ */
+        ============================================================ */
 
         function draw() {
 
@@ -459,60 +699,94 @@
             );
 
 
-            /*
-             * Tiny coordinate axes.
-             */
+            /* --------------------------------------------------------
+               Tiny coordinate axes
+            -------------------------------------------------------- */
 
             ctx.beginPath();
 
+
             ctx.moveTo(
-                width / 2 - 24,
+                width / 2 - 22,
                 height / 2
             );
 
             ctx.lineTo(
-                width / 2 + 24,
+                width / 2 + 22,
                 height / 2
             );
 
+
             ctx.moveTo(
                 width / 2,
-                height / 2 - 24
+                height / 2 - 22
             );
 
             ctx.lineTo(
                 width / 2,
-                height / 2 + 24
+                height / 2 + 22
             );
+
 
             ctx.strokeStyle =
-                "rgba(23,23,20,0.14)";
+                "rgba(23,23,20,0.13)";
 
             ctx.lineWidth = 0.5;
 
             ctx.stroke();
 
 
-            /*
-             * Particle trajectories.
-             */
+            /* --------------------------------------------------------
+               Particle trajectories
+            -------------------------------------------------------- */
 
             for (const p of particles) {
+
 
                 if (p.history.length < 2)
                     continue;
 
+
                 ctx.beginPath();
 
+
+                let previous =
+                    p.history[0];
+
+
+                ctx.moveTo(
+                    previous.x,
+                    previous.y
+                );
+
+
                 for (
-                    let i = 0;
+                    let i = 1;
                     i < p.history.length;
                     i++
                 ) {
 
-                    const q = p.history[i];
+                    const q =
+                        p.history[i];
 
-                    if (i === 0) {
+
+                    /*
+                     * Don't connect points when
+                     * a particle wrapped around
+                     * the simulation boundary.
+                     */
+
+                    if (q.wrapped) {
+
+                        ctx.strokeStyle =
+                            "rgba(23,23,20,0.065)";
+
+                        ctx.lineWidth = 0.45;
+
+                        ctx.stroke();
+
+
+                        ctx.beginPath();
 
                         ctx.moveTo(
                             q.x,
@@ -525,69 +799,117 @@
                             q.x,
                             q.y
                         );
+
                     }
+
+
+                    previous = q;
+
                 }
 
+
                 ctx.strokeStyle =
-                    "rgba(23,23,20,0.075)";
+                    "rgba(23,23,20,0.065)";
 
                 ctx.lineWidth = 0.45;
 
                 ctx.stroke();
 
 
-                /*
-                 * Current particle.
-                 */
+                /* ----------------------------------------------------
+                   Current particle
+                ---------------------------------------------------- */
 
                 const last =
-                    p.history[p.history.length - 1];
+                    p.history[
+                        p.history.length - 1
+                    ];
+
 
                 ctx.beginPath();
+
 
                 ctx.arc(
                     last.x,
                     last.y,
-                    1.1,
+                    1.65,
                     0,
                     Math.PI * 2
                 );
 
+
                 ctx.fillStyle =
-                    "rgba(23,23,20,0.32)";
+                    "rgba(23,23,20,0.38)";
+
 
                 ctx.fill();
+
             }
+
         }
 
 
-        /* ------------------------------------------------------------
+        /* ============================================================
            ANIMATION
-        ------------------------------------------------------------ */
+        ============================================================ */
 
         function animate() {
 
+            /*
+             * Multiple small integration steps
+             * per animation frame.
+             */
+
             for (let i = 0; i < 3; i++) {
+
                 step();
+
             }
+
 
             draw();
 
-            requestAnimationFrame(animate);
+
+            requestAnimationFrame(
+                animate
+            );
+
         }
 
 
         animate();
 
 
-        /* ------------------------------------------------------------
+        /* ============================================================
            PARAMETERS
-        ------------------------------------------------------------ */
+        ============================================================ */
 
         particlesInput.addEventListener(
             "change",
             createParticles
         );
+
+
+        /*
+         * Allow pressing Enter after changing
+         * the particle count.
+         */
+
+        particlesInput.addEventListener(
+            "keydown",
+            function(event) {
+
+                if (event.key === "Enter") {
+
+                    createParticles();
+
+                    particlesInput.blur();
+
+                }
+
+            }
+        );
+
 
     </script>
 
