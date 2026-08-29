@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>John Driscoll</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: #f3efe3;
+    color: #171713;
+    overflow: hidden;
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+
+/* ============================================================
+   NAME
+   ============================================================ */
+
+.name {
+    position: fixed;
+
+    top: 35px;
+    left: 42px;
+
+    width: min(430px, 42vw);
+
+    z-index: 10;
+
+    mix-blend-mode: multiply;
+}
+
+
+/* ============================================================
+   PAINTINGS
+   ============================================================ */
+
+.painting {
+    position: fixed;
+    z-index: 5;
+    margin: 0;
+}
+
+.painting img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.flowers {
+    width: 215px;
+    right: 7vw;
+    top: 10vh;
+}
+
+.still-life {
+    width: 245px;
+    left: 7vw;
+    bottom: 8vh;
+}
+
+
+/* ============================================================
+   CAPTIONS
+   ============================================================ */
+
+.caption {
+    margin-top: 6px;
+
+    font-size: 9px;
+    line-height: 1.2;
+
+    color: rgba(23, 23, 19, 0.40);
+}
+
+.caption a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.caption a:hover {
+    color: #171713;
+}
+
+
+/* ============================================================
+   SIMULATION
+   ============================================================ */
+
+.simulation {
+    position: fixed;
+    left: 50%;
+    top: 48%;
+
+    transform: translate(-50%, -50%);
+
+    width: min(650px, 55vw);
+    height: min(520px, 58vh);
+
+    z-index: 1;
+}
+
+#canvas {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    opacity: 0.38;
+}
+
+
+/* ============================================================
+   EQUATION
+   ============================================================ */
+
+.equation {
+    position: fixed;
+
+    left: 50%;
+    bottom: 87px;
+
+    transform: translateX(-50%);
+
+    z-index: 4;
+
+    font-size: 11px;
+
+    color: rgba(23, 23, 19, 0.43);
+
+    white-space: nowrap;
+}
+
+
+/* ============================================================
+   PARAMETERS
+   ============================================================ */
+
+.controls {
+    position: fixed;
+
+    left: 50%;
+    bottom: 53px;
+
+    transform: translateX(-50%);
+
+    z-index: 10;
+
+    display: flex;
+    gap: 18px;
+
+    align-items: center;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 9px;
+
+    color: rgba(23, 23, 19, 0.42);
+
+    pointer-events: auto;
+}
+
+.controls label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.controls input {
+    width: 42px;
+
+    border: 0;
+
+    border-bottom:
+        1px solid rgba(23, 23, 19, 0.20);
+
+    border-radius: 0;
+
+    padding: 1px 0;
+
+    background: transparent;
+
+    outline: none;
+
+    color: rgba(23, 23, 19, 0.65);
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 9px;
+
+    text-align: center;
+
+    appearance: textfield;
+
+    -moz-appearance: textfield;
+}
+
+.controls input::-webkit-inner-spin-button,
+.controls input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.controls input:focus {
+    border-bottom-color:
+        rgba(23, 23, 19, 0.55);
+}
+
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+
+nav {
+    position: fixed;
+
+    right: 42px;
+    bottom: 35px;
+
+    z-index: 10;
+
+    display: flex;
+    gap: 22px;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 0.12em;
+
+    text-transform: uppercase;
+}
+
+nav a {
+    color: #171713;
+    text-decoration: none;
+}
+
+nav a:hover {
+    opacity: 0.4;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 700px) {
+
+    .name {
+        top: 23px;
+        left: 23px;
+
+        width: 270px;
+        max-width: 70vw;
+    }
+
+    .flowers {
+        width: 145px;
+        right: 6vw;
+        top: 17vh;
+    }
+
+    .still-life {
+        width: 160px;
+        left: 6vw;
+        bottom: 14vh;
+    }
+
+    .simulation {
+        width: 82vw;
+        height: 52vh;
+    }
+
+    .equation {
+        bottom: 82px;
+        font-size: 9px;
+    }
+
+    .controls {
+        bottom: 47px;
+        gap: 11px;
+    }
+
+    nav {
+        right: 23px;
+        bottom: 22px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ============================================================
+     NAME
+     ============================================================ -->
+
+<img
+class="name"
+src="JOHN_DRISCOLL_eigenfunctions_lmr.png"
+alt="John Driscoll"
+
+>
+
+<!-- ============================================================
+     MONET
+     ============================================================ -->
+
+<figure class="painting flowers">
+
+```
+<img src="flowers.webp" alt="">
+
+<figcaption class="caption">
+
+    Monet —
+    <a
+        href="https://www.dreamdeepbaby.com/collections/artichoke-flowers"
+        target="_blank"
+        rel="noopener"
+    >
+        Jerusalem Artichoke Flowers
+    </a>
+
+</figcaption>
+```
+
+</figure>
+
+<figure class="painting still-life">
+
+```
+<img src="still_life.webp" alt="">
+
+<figcaption class="caption">
+
+    Monet —
+    <a
+        href="https://www.dreamdeepbaby.com/collections/still-life"
+        target="_blank"
+        rel="noopener"
+    >
+        Still Life with Flowers and Fruit
+    </a>
+
+</figcaption>
+```
+
+</figure>
+
+<!-- ============================================================
+     REACTION-DIFFUSION SIMULATION
+     ============================================================ -->
+
+<div class="simulation">
+
+```
+<canvas id="canvas"></canvas>
+```
+
+</div>
+
+<!-- ============================================================
+     GRAY-SCOTT EQUATIONS
+     ============================================================ -->
+
+<div class="equation">
+
+```
+∂u/∂t = Dᵤ∇²u − uv² + F(1 − u)
+&nbsp;&nbsp;&nbsp;
+∂v/∂t = Dᵥ∇²v + uv² − (F + k)v
+```
+
+</div>
+
+<!-- ============================================================
+     PARAMETERS
+     ============================================================ -->
+
+<div class="controls">
+
+```
+<label>
+    F
+    <input
+        id="feed"
+        type="number"
+        value="0.055"
+        step="0.001"
+    >
+</label>
+
+<label>
+    k
+    <input
+        id="kill"
+        type="number"
+        value="0.062"
+        step="0.001"
+    >
+</label>
+
+<label>
+    Dᵤ
+    <input
+        id="du"
+        type="number"
+        value="0.16"
+        step="0.01"
+    >
+</label>
+
+<label>
+    Dᵥ
+    <input
+        id="dv"
+        type="number"
+        value="0.08"
+        step="0.01"
+    >
+</label>
+```
+
+</div>
+
+<!-- ============================================================
+     NAVIGATION
+     ============================================================ -->
+
+<nav>
+
+```
+<a href="research.html">
+    Research
+</a>
+
+<a href="cv.html">
+    CV
+</a>
+```
+
+</nav>
+
+<script>
+
+
+/* ============================================================
+   CANVAS
+   ============================================================ */
+
+const canvas =
+    document.getElementById("canvas");
+
+const ctx =
+    canvas.getContext("2d");
+
+
+const simWidth = 260;
+const simHeight = 210;
+
+canvas.width = simWidth;
+canvas.height = simHeight;
+
+
+/* ============================================================
+   PARAMETERS
+   ============================================================ */
+
+let F = 0.055;
+let k = 0.062;
+
+let Du = 0.16;
+let Dv = 0.08;
+
+
+const feedInput =
+    document.getElementById("feed");
+
+const killInput =
+    document.getElementById("kill");
+
+const duInput =
+    document.getElementById("du");
+
+const dvInput =
+    document.getElementById("dv");
+
+
+/* ============================================================
+   STATE
+   ============================================================ */
+
+let u;
+let v;
+
+
+function createSystem() {
+
+    u =
+        new Float32Array(
+            simWidth * simHeight
+        );
+
+    v =
+        new Float32Array(
+            simWidth * simHeight
+        );
+
+
+    for (
+        let i = 0;
+        i < u.length;
+        i++
+    ) {
+
+        u[i] = 1;
+        v[i] = 0;
+    }
+
+
+    /*
+     * Small central perturbations.
+     */
+
+    const cx =
+        simWidth / 2;
+
+    const cy =
+        simHeight / 2;
+
+
+    for (
+        let y0 = cy - 14;
+        y0 < cy + 14;
+        y0++
+    ) {
+
+        for (
+            let x0 = cx - 14;
+            x0 < cx + 14;
+            x0++
+        ) {
+
+            const dx =
+                x0 - cx;
+
+            const dy =
+                y0 - cy;
+
+
+            if (
+                dx * dx +
+                dy * dy <
+                180
+            ) {
+
+                const index =
+                    y0 * simWidth + x0;
+
+                u[index] = 0.50;
+                v[index] = 0.25;
+            }
+        }
+    }
+
+}
+
+
+/* ============================================================
+   PARAMETER UPDATE
+   ============================================================ */
+
+function updateParameters() {
+
+    const newF =
+        parseFloat(feedInput.value);
+
+    const newK =
+        parseFloat(killInput.value);
+
+    const newDu =
+        parseFloat(duInput.value);
+
+    const newDv =
+        parseFloat(dvInput.value);
+
+
+    if (
+        Number.isFinite(newF) &&
+        Number.isFinite(newK) &&
+        Number.isFinite(newDu) &&
+        Number.isFinite(newDv)
+    ) {
+
+        F = newF;
+        k = newK;
+
+        Du = newDu;
+        Dv = newDv;
+
+        createSystem();
+    }
+
+}
+
+
+feedInput.addEventListener(
+    "input",
+    updateParameters
+);
+
+killInput.addEventListener(
+    "input",
+    updateParameters
+);
+
+duInput.addEventListener(
+    "input",
+    updateParameters
+);
+
+dvInput.addEventListener(
+    "input",
+    updateParameters
+);
+
+
+createSystem();
+
+
+/* ============================================================
+   LAPLACIAN
+   ============================================================ */
+
+function laplacian(arr, x0, y0) {
+
+    const xm =
+        x0 === 0 ?
+        simWidth - 1 :
+        x0 - 1;
+
+    const xp =
+        x0 === simWidth - 1 ?
+        0 :
+        x0 + 1;
+
+    const ym =
+        y0 === 0 ?
+        simHeight - 1 :
+        y0 - 1;
+
+    const yp =
+        y0 === simHeight - 1 ?
+        0 :
+        y0 + 1;
+
+
+    const center =
+        arr[y0 * simWidth + x0];
+
+
+    return (
+        arr[y0 * simWidth + xm] +
+        arr[y0 * simWidth + xp] +
+        arr[ym * simWidth + x0] +
+        arr[yp * simWidth + x0] -
+        4 * center
+    );
+
+}
+
+
+/* ============================================================
+   SIMULATION STEP
+   ============================================================ */
+
+const nextU =
+    new Float32Array(
+        simWidth * simHeight
+    );
+
+const nextV =
+    new Float32Array(
+        simWidth * simHeight
+    );
+
+
+function simulate() {
+
+    const dt = 1;
+
+
+    for (
+        let y0 = 0;
+        y0 < simHeight;
+        y0++
+    ) {
+
+        for (
+            let x0 = 0;
+            x0 < simWidth;
+            x0++
+        ) {
+
+            const index =
+                y0 * simWidth + x0;
+
+
+            const U =
+                u[index];
+
+            const V =
+                v[index];
+
+
+            const reaction =
+                U * V * V;
+
+
+            const Lu =
+                laplacian(
+                    u,
+                    x0,
+                    y0
+                );
+
+
+            const Lv =
+                laplacian(
+                    v,
+                    x0,
+                    y0
+                );
+
+
+            nextU[index] =
+                U +
+                dt *
+                (
+                    Du * Lu -
+                    reaction +
+                    F * (1 - U)
+                );
+
+
+            nextV[index] =
+                V +
+                dt *
+                (
+                    Dv * Lv +
+                    reaction -
+                    (F + k) * V
+                );
+
+        }
+    }
+
+
+    const tempU = u;
+    u = nextU;
+    nextU.set(tempU);
+
+
+    const tempV = v;
+    v = nextV;
+    nextV.set(tempV);
+
+}
+
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+
+const image =
+    ctx.createImageData(
+        simWidth,
+        simHeight
+    );
+
+
+function draw() {
+
+    for (
+        let i = 0;
+        i < v.length;
+        i++
+    ) {
+
+        const value =
+            Math.max(
+                0,
+                Math.min(
+                    1,
+                    v[i] * 2.8
+                )
+            );
+
+
+        /*
+         * Keep the pattern monochrome so it
+         * remains quiet against the paintings.
+         */
+
+        const c =
+            Math.floor(
+                value * 255
+            );
+
+
+        image.data[i * 4] =
+            c;
+
+        image.data[i * 4 + 1] =
+            c;
+
+        image.data[i * 4 + 2] =
+            c;
+
+        image.data[i * 4 + 3] =
+            255;
+    }
+
+
+    ctx.putImageData(
+        image,
+        0,
+        0
+    );
+}
+
+
+/* ============================================================
+   ANIMATION
+   ============================================================ */
+
+function animate() {
+
+    /*
+     * Several numerical steps per frame.
+     */
+
+    for (
+        let i = 0;
+        i < 5;
+        i++
+    ) {
+
+        simulate();
+    }
+
+
+    draw();
+
+    requestAnimationFrame(
+        animate
+    );
+
+}
+
+
+animate();
+
+</script>
+
+</body>
+
+</html>
