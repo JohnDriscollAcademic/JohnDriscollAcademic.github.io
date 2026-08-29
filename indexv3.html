@@ -14,87 +14,39 @@
 
         html, body {
             margin: 0;
-            padding: 0;
+            width: 100%;
+            height: 100%;
         }
 
         body {
-            background: #f7f6f2;
-            color: #171717;
+            background: #f5f4ef;
+            color: #111;
+            overflow: hidden;
             font-family: Georgia, "Times New Roman", serif;
-            min-height: 100vh;
-        }
-
-        .page {
-            width: min(1200px, 90vw);
-            margin: 0 auto;
         }
 
         /* NAME */
 
-        header {
-            padding: 42px 0 34px;
-            border-bottom: 1px solid #d8d6d0;
-        }
-
         .name {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: clamp(2.5rem, 6vw, 5.5rem);
-            font-weight: 300;
-            letter-spacing: -0.055em;
-            line-height: 0.9;
+            position: fixed;
+            top: 42px;
+            left: 50px;
+            z-index: 10;
+
             margin: 0;
-        }
 
-        /* MAIN */
-
-        main {
-            display: grid;
-            grid-template-columns: 1fr 220px;
-            gap: 90px;
-            padding: 80px 0 100px;
-        }
-
-        .intro {
-            max-width: 650px;
-        }
-
-        .intro p {
-            font-size: 1.15rem;
-            line-height: 1.7;
-            margin: 0 0 28px;
-        }
-
-        .links {
-            display: flex;
-            gap: 28px;
-            margin-top: 42px;
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 0.78rem;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .links a {
-            color: #171717;
-            text-decoration: none;
-            border-bottom: 1px solid #171717;
-            padding-bottom: 3px;
-        }
-
-        .links a:hover {
-            opacity: 0.5;
+            font-size: clamp(2.5rem, 6vw, 6rem);
+            font-weight: 300;
+            letter-spacing: -0.065em;
+            line-height: 0.85;
         }
 
         /* PAINTINGS */
 
-        .paintings {
-            display: flex;
-            flex-direction: column;
-            gap: 55px;
-            padding-top: 5px;
-        }
-
         .painting {
+            position: fixed;
+            z-index: 2;
             margin: 0;
         }
 
@@ -104,62 +56,83 @@
             height: auto;
         }
 
-        .painting figcaption {
-            margin-top: 10px;
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            color: #77756f;
+        .flowers {
+            width: 190px;
+            right: 8vw;
+            top: 13vh;
+            transform: rotate(1.5deg);
         }
 
-        /* FOOTER */
+        .still-life {
+            width: 220px;
+            left: 10vw;
+            bottom: 10vh;
+            transform: rotate(-1.5deg);
+        }
 
-        footer {
-            border-top: 1px solid #d8d6d0;
-            padding: 22px 0 35px;
+        /* MATH */
+
+        #canvas {
+            position: fixed;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.72;
+        }
+
+        /* SMALL NAV */
+
+        nav {
+            position: fixed;
+            bottom: 42px;
+            right: 50px;
+            z-index: 10;
+
             display: flex;
-            justify-content: space-between;
+            gap: 24px;
+
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 0.65rem;
-            letter-spacing: 0.08em;
+            font-size: 11px;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            color: #77756f;
         }
 
-        /* MOBILE */
+        nav a {
+            color: #111;
+            text-decoration: none;
+        }
 
-        @media (max-width: 750px) {
-            header {
-                padding-top: 28px;
+        nav a:hover {
+            opacity: 0.4;
+        }
+
+        @media (max-width: 700px) {
+
+            body {
+                overflow: hidden;
             }
 
-            main {
-                display: block;
-                padding: 55px 0 70px;
+            .name {
+                top: 25px;
+                left: 25px;
             }
 
-            .intro {
-                max-width: 100%;
+            .flowers {
+                width: 135px;
+                right: 8vw;
+                top: 18vh;
             }
 
-            .paintings {
-                margin-top: 70px;
-                width: 65%;
-                margin-left: auto;
+            .still-life {
+                width: 155px;
+                left: 8vw;
+                bottom: 15vh;
             }
 
-            .links {
-                flex-wrap: wrap;
-            }
-
-            footer {
-                display: block;
-            }
-
-            footer span {
-                display: block;
-                margin-bottom: 8px;
+            nav {
+                bottom: 25px;
+                right: 25px;
             }
         }
     </style>
@@ -167,57 +140,159 @@
 
 <body>
 
-    <div class="page">
+    <h1 class="name">John Driscoll</h1>
 
-        <header>
-            <h1 class="name">John Driscoll</h1>
-        </header>
+    <figure class="painting flowers">
+        <img src="flowers.webp" alt="">
+    </figure>
 
-        <main>
+    <figure class="painting still-life">
+        <img src="still_life.webp" alt="">
+    </figure>
 
-            <section class="intro">
+    <canvas id="canvas"></canvas>
 
-                <p>
-                    Applied mathematician working in numerical analysis,
-                    scientific computing, and computational science.
-                </p>
+    <nav>
+        <a href="research.html">Research</a>
+        <a href="cv.html">CV</a>
+    </nav>
 
-                <p>
-                    Research interests include numerical methods for
-                    differential equations, iterative methods, and
-                    high-performance scientific computing.
-                </p>
 
-                <nav class="links">
-                    <a href="research.html">Research</a>
-                    <a href="cv.html">CV</a>
-                    <a href="mailto:your@email.com">Contact</a>
-                </nav>
+    <script>
 
-            </section>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
 
-            <aside class="paintings">
+        let width;
+        let height;
 
-                <figure class="painting">
-                    <img src="flowers.webp" alt="Flowers">
-                    <figcaption>Flowers</figcaption>
-                </figure>
+        function resize() {
+            width = canvas.width = window.innerWidth * devicePixelRatio;
+            height = canvas.height = window.innerHeight * devicePixelRatio;
 
-                <figure class="painting">
-                    <img src="still_life.webp" alt="Still life">
-                    <figcaption>Still Life</figcaption>
-                </figure>
+            ctx.scale(devicePixelRatio, devicePixelRatio);
 
-            </aside>
+            width = window.innerWidth;
+            height = window.innerHeight;
+        }
 
-        </main>
+        window.addEventListener("resize", resize);
+        resize();
 
-        <footer>
-            <span>Mathematics · Scientific Computing</span>
-            <span>2026</span>
-        </footer>
 
-    </div>
+        /*
+         * Lorenz system
+         *
+         * x' = sigma(y-x)
+         * y' = x(rho-z)-y
+         * z' = xy-beta z
+         */
+
+        const sigma = 10;
+        const rho = 28;
+        const beta = 8 / 3;
+
+        let x = 0.1;
+        let y = 0;
+        let z = 0;
+
+        const points = [];
+
+        const maxPoints = 4200;
+
+
+        function step(dt) {
+
+            const dx = sigma * (y - x);
+            const dy = x * (rho - z) - y;
+            const dz = x * y - beta * z;
+
+            x += dx * dt;
+            y += dy * dt;
+            z += dz * dt;
+
+            points.push({
+                x: x,
+                y: y,
+                z: z
+            });
+
+            if (points.length > maxPoints) {
+                points.shift();
+            }
+        }
+
+
+        function draw() {
+
+            ctx.clearRect(0, 0, width, height);
+
+            /*
+             * Slowly rotate the attractor.
+             */
+
+            const angle = performance.now() * 0.00008;
+
+            const cosA = Math.cos(angle);
+            const sinA = Math.sin(angle);
+
+            ctx.beginPath();
+
+            for (let i = 0; i < points.length; i++) {
+
+                const p = points[i];
+
+                const rx =
+                    p.x * cosA -
+                    p.z * sinA;
+
+                const rz =
+                    p.x * sinA +
+                    p.z * cosA;
+
+                const scale =
+                    Math.min(width, height) / 95;
+
+                const px =
+                    width / 2 +
+                    rx * scale;
+
+                const py =
+                    height / 2 -
+                    p.y * scale * 0.55;
+
+                if (i === 0) {
+                    ctx.moveTo(px, py);
+                } else {
+                    ctx.lineTo(px, py);
+                }
+            }
+
+            ctx.strokeStyle = "#111";
+            ctx.lineWidth = 0.65;
+            ctx.stroke();
+        }
+
+
+        function animate() {
+
+            /*
+             * Several integration steps per frame
+             * keep the attractor smooth.
+             */
+
+            for (let i = 0; i < 8; i++) {
+                step(0.005);
+            }
+
+            draw();
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+    </script>
 
 </body>
 </html>
